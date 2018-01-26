@@ -1,32 +1,27 @@
 /// <reference types="aurelia-loader-webpack/src/webpack-hot-interface"/>
-// we want font-awesome to load as soon as possible to show the fa-spinner
-import {Aurelia} from 'aurelia-framework'
-import environment from './environment';
-import {PLATFORM} from 'aurelia-pal';
-import * as Bluebird from 'bluebird';
 
-// remove out if you don't want a Promise polyfill (remove also from webpack.config.js)
+import { Aurelia } from "aurelia-framework";
+import { PLATFORM } from "aurelia-pal";
+import * as Bluebird from "bluebird";
+import environment from "./environment";
+
 Bluebird.config({ warnings: { wForgottenReturn: false } });
 
-export function configure(aurelia: Aurelia) {
-  aurelia.use
-    .standardConfiguration()
-    .feature(PLATFORM.moduleName('resources/index'));
-
-  // Uncomment the line below to enable animation.
-  // aurelia.use.plugin(PLATFORM.moduleName('aurelia-animator-css'));
-  // if the css animator is enabled, add swap-order="after" to all router-view elements
-
-  // Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  // aurelia.use.plugin(PLATFORM.moduleName('aurelia-html-import-template-loader'));
-
-  if (environment.debug) {
-    aurelia.use.developmentLogging();
+export async function configure(au: Aurelia): Promise<void> {
+  if (environment.debug || environment.testing) {
+    ((PLATFORM.global as Window) as any) = au;
   }
 
-  if (environment.testing) {
-    aurelia.use.plugin(PLATFORM.moduleName('aurelia-testing'));
-  }
+  au.use.defaultBindingLanguage();
+  au.use.defaultResources();
+  au.use.eventAggregator();
+  au.use.router();
+  au.use.history();
 
-  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+  au.use.feature(PLATFORM.moduleName("plugins/index"));
+  au.use.feature(PLATFORM.moduleName("resources/index"));
+
+  await au.start();
+
+  await au.setRoot("routes/main/app", au.host);
 }
