@@ -1,28 +1,31 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
+    "allowJs": true,
+    "alwaysStrict": true,
+    "baseUrl": "src",
+    "declaration": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2017", "dom"],
+    "module": "esnext",
     "moduleResolution": "node",
-    "sourceRoot": "src",
-    "allowJs": true,
-    "baseUrl": "src",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
     "skipLibCheck": true,
-    "lib": [
-      "es2017", "dom"
-    ]
+    "sourceMap": true,
+    "sourceRoot": "src",
+    "strictNullChecks": false,
+    "target": "es5"
   },
-  "exclude": [
-    "node_modules",
-    "aurelia_project"
-  ],
-  "filesGlob": [
-    "./src/**/*.ts",
-    "./test/**/*.ts",
-    "./custom_typings/**/*.d.ts"
-  ],
+  "exclude": ["node_modules", "aurelia_project"],
+  "filesGlob": ["./src/**/*.ts", "./test/**/*.ts", "./custom_typings/**/*.d.ts"],
   "atom": {
     "rewriteTsconfig": false
   }

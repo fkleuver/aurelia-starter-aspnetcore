@@ -6,6 +6,7 @@
   "html.suggest.ionic": false,
   "html.format.endWithNewline": true,
   "tslint.exclude": [
+    "**/aurelia_project/**",
     "**/node_modules/**"
   ],
   "emmet.triggerExpansionOnTab": true,
