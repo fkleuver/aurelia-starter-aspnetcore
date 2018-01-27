@@ -9,7 +9,7 @@ Bluebird.config({ warnings: { wForgottenReturn: false } });
 
 export async function configure(au: Aurelia): Promise<void> {
   if (environment.debug || environment.testing) {
-    ((PLATFORM.global as Window) as any) = au;
+    ((PLATFORM.global as Window) as any).au = au;
   }
 
   au.use.defaultBindingLanguage();
