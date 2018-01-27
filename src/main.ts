@@ -23,5 +23,5 @@ export async function configure(au: Aurelia): Promise<void> {
 
   await au.start();
 
-  await au.setRoot("routes/main/app", au.host);
+  await au.setRoot(PLATFORM.moduleName("routes/main/app"), au.host);
 }
